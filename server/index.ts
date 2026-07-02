@@ -11,11 +11,14 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const corsOrigin = process.env.CORS_ORIGIN;
-app.use(
-  cors({
-    origin: corsOrigin ? corsOrigin.split(',') : true,
-  })
-);
+const corsOptions: cors.CorsOptions = {
+  origin: corsOrigin
+    ? corsOrigin === '*'
+      ? '*'
+      : corsOrigin.split(',')
+    : true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const openai = new OpenAI({
