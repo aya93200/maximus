@@ -14,7 +14,6 @@ const corsOrigin = process.env.CORS_ORIGIN;
 app.use(
   cors({
     origin: corsOrigin ? corsOrigin.split(',') : true,
-    credentials: true,
   })
 );
 app.use(express.json());
